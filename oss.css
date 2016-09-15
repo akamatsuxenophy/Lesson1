@@ -1,0 +1,61 @@
+.main{
+  margin: 0 auto;
+  width:1280px;
+}
+.abox {
+  width: 1280px;
+  height: 80px;
+  background-color: green;
+  border-bottom: 5px solid #FF9900;
+  text-align: center;
+  font-size: 22px;
+}
+
+.bbox{
+  float: left;
+  background-color: red;
+  border-right: 5px solid #FF9900;
+  width:100px;
+  height:1000px;
+  font-size: 18px;
+}
+
+.cbox{
+  float:right;
+  width:1175px;
+  height:200px;
+  background-color: aqua;
+  font-size: 16px;
+}
+
+.dbox{
+  float:right;
+  width:392px;
+  height:200px;
+  background-color: pink;
+}
+.dbox2{
+  float:right;
+  width:392px;
+  height:200px;
+}
+.dbox3{
+  float:right;
+  width:391px;
+  height:200px;
+  background-color: pink;
+}
+.pic{
+  float:right;
+  width:1180px;
+  height:400px;
+  background-color: black;
+}
+
+.ebox{
+  float:right;
+  width:1180px;
+  height:200px;
+  background-color: yellow;
+  font-size: 80px;
+}
