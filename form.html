@@ -8,10 +8,9 @@
   <body>
     <div class="main">
       <div class="title">
-        入力画面
+        <center>入力画面</center>
       </div>
-
-      <div>
+      <form method="--" action="--">
         <p>名前:<input type="text" name"名前"/>
         </p>
 
@@ -125,23 +124,25 @@
           <input type="radio" name="性別"value="女"/>女
         </p>
 
-        <p>家族:<input type="radio" name="家族"value="独身"/>独身
+        <p>家族構成:<input type="radio" name="家族"value="独身"/>独身
           <input type="radio" name="家族"value="妻"/>妻
           <input type="radio" name="家族"value="子供"/>子供
         </p>
 
-          <p><input type="checkbox" name="riyu" value="1">スポーツ
-            <input type="checkbox" name="riyu" value="2">映画
-            <input type="checkbox" name="riyu" value="3">読書
-            <input type="checkbox" name="riyu" value="4">その他
-          </p>
+        <p>趣味:<input type="checkbox" name="趣味" value="1">スポーツ
+          <input type="checkbox" name="趣味" value="2">映画
+          <input type="checkbox" name="趣味" value="3">読書
+          <input type="checkbox" name="趣味" value="4">その他
+        </p>
 
-
-
-
-
-
-      </div>
+        <p>備考：<textarea name="備考" row="4" cols="40"></textarea>
+        </p>
+        <div class="subit">
+          <input type="reset" value="キャンセル" />
+          <input type="submit" value="送信" />
+        </div>
+      </form>
+    </div>
 
   </body>
 </html>

@@ -1,11 +1,16 @@
 .main{
   margin: 0 auto;
-  width:800px;
-  height:1950;
+  width:500px;
+  height:450px;
+  padding: 30px;
   background-color: #fc9;
 }
 
 .title{
   height: 80px;
   font-size:40px;
+}
+
+.subit{
+  float:right;
 }
