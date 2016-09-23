@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>lesson4-counfirm</title>
+  <link rel="stylesheet" type="text/css" href="oss5.css"/>
+  <script type="text/javascript" src="./confirm.js">
+  </script>
+</head>
+<body>
+<form method="POST" action="confirm.html">
+    <div class="title">
+      確認画面
+    </div>
+
+    <div>
+      <label for="name">名前:</label>
+        <label class="check">［"; print $_POST[‘name’]</label>
+    </div>
+
+    <div>
+      <label for="address">住所:</label>
+        <label class="check">$_GET["address"]</label>
+    </div>
+
+    <div>
+      <label for="seibetsu">性別:</label>
+        <label class="check">男</label>
+      </div>
+
+    <div>
+      <label for="age">年齢:</label>
+        <label class="check">２０代</label>
+      </div>
+
+    <div>
+      <label for="e-mail">メールアドレス:</label>
+      <label class="check">abcdefg@.com</label>
+    </div>
+
+    <div>
+      <label for="tel">TEL:</label>
+      <label class="check">000-111-2222</label>
+    </div>
+    <!-- <TABLE> -->
+<!--
+      <TR><TH>名前</TH>
+
+          <TD>赤松　聖</TD></TR>
+
+      <TR><TH>住所</TH>
+
+          <TD>札幌市</TD></TR>
+
+      <TR><TH>性別</TH>
+
+          <TD>男</TD></TR>
+
+      <TR><TH>年齢</TH>
+
+          <TD>２０代</TD></TR>
+
+      <TR><TH>E-Mail</TH>
+
+          <TD>abcdef@jp</TD></TR>
+
+      <TR><TH>電話番号</TH>
+
+          <TD>000-111-2222</TD></TR>
+
+ -->
+    <!-- </TABLE> -->
+
+    <div class="button">
+      <a>送信する</a>
+      <a href="input.html">キャンセル</a>
+      <!-- <button type="reset">キャンセル</button>
+      <button type="submit">送信する</button> -->
+    </div>
+ </form>
+ </body>
+</html>
