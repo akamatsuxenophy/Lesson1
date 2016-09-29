@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <title>lesson4-form</title>
     <link rel="stylesheet" type="text/css" href="oss5.css"/>
-    <script type="text/javascript" src="./input.js">
-    </script>
   </head>
   <body>
-      <form method="POST" action="confirm.html">
+      <form class="inform" method="POST" action="confirm.html">
         <div class="title">
          入力Form
       　</div>
         <div>
           <label for="name">名前:　</label>
-          <label class="check"><input type="text" id="name" /></label>
+          <label class="check"><input type="text" id="name" name="name" /></label>
         </div>
 
         <div>
@@ -51,6 +49,13 @@
           <a href="#" onclick="btnClick()">送信</a>
 
         </div>
+
+
+        <input type="hidden" name="Confirm_Page" value="confirm.html">
+
+
       </form>
+      <script type="text/javascript" src="./input.js">
+      </script>
   </body>
 </html>
