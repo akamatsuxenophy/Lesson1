@@ -62,22 +62,25 @@ function btnClick(){
       flag = 1;
     }
 
-    for(var i=0;i<ages.check.length;i++){
-      if(ages.check[i].checked == true){
-        var hoge = ages.checked[i].value;
-      alert(hoge+"が選択されています");
+    var str="";
+
+      //for文でチェックボックスを１つずつ確認
+      for( i=0; i<ages.length; i++ )
+      {
+        //チェックされているか確認する
+        if( ages[i].checked )
+        {
+          //変数strが空でない時、区切りのコンマを入れる
+          if( str != "" ) str=str+",";
+
+          //チェックボックスのvalue値を変数strに入れる
+          str=str+ages[i].value;
+        }
       }
-	 }
 
-
-for(var i=0;i<seibetsu.radio.length;i++){
-            if(seibetsu.radio[i].checked == true){
-              var hogeb = seibetsu.radio[i].value;
-              alert(hogeb +"が選択されています");
-  }
-}
-
-
+      //strが空の時、警告を出す
+      if( str=="" ){
+         alert( "どれか選択してください。" );
    //メールアドレス
     else if(email == ""){
       flag = 1;
