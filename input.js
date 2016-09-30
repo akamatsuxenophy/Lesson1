@@ -80,7 +80,36 @@ function btnClick(){
 
       //strが空の時、警告を出す
       if( str=="" ){
-         alert( "どれか選択してください。" );
+         alert( "年齢を選択してください。" );
+       }
+
+
+         var stra="";
+
+           //for文でチェックボックスを１つずつ確認
+           for( i=0; i<seibetsu.length; i++ )
+           {
+             //チェックされているか確認する
+             if( seibetsu[i].checked )
+             {
+               //変数strが空でない時、区切りのコンマを入れる
+               if( stra != "" ) stra=stra+",";
+
+               //チェックボックスのvalue値を変数strに入れる
+               stra=stra+seibetsu[i].value;
+             }
+           }
+
+           //strが空の時、警告を出す
+           if( stra=="" ){
+              alert( "性別を選択してください。" );
+
+
+
+       }
+
+
+
    //メールアドレス
     else if(email == ""){
       flag = 1;
@@ -108,11 +137,12 @@ function btnClick(){
   		return false; // 送信を中止
 
   	}
-  	else{
-
-  		return true; // 送信を実行
-
-  	}
+  	// else{
+    //
+  	// 	return true; // 送信を実行
+    //
+    //
+  	// }
 
 
   //URLを決める

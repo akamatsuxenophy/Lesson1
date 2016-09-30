@@ -45,10 +45,10 @@ var target = document.getElementById("usersex");
     }
 
 
-    if (s_val==0) {
-       window.alert('いずれか一つ以上を選択して下さい。');
-       return(false);
-       }
+    // if (s_val==0) {
+    //    window.alert('いずれか一つ以上を選択して下さい。');
+    //   //  return(false);
+    //    }
 
 
 
