@@ -1,5 +1,8 @@
 console.log('input.js');
-function btnClick(){
+
+// TODO インデントは再度見直し
+
+function btnClick() {
 
   var result = true;
 
@@ -22,6 +25,9 @@ function btnClick(){
   //性別女か//
   var onna = document.getElementById('onna').checked;
 
+  // TODO チェックボックスの値はclassで配列で取得して判定する
+  // TODO document.getElementsByName('age')で取得した配列をループさせてチェックする（性別も同様）
+
   //１０代か
   var juu = document.getElementById('juu').checked;
 　//２０代か
@@ -31,120 +37,110 @@ function btnClick(){
 　//４０代か
   var yonjuu = document.getElementById('yonjuu').checked;
 
-  var ages = document.getElementsByName('age')
-  var seibetsu = document.getElementsByName('seibetsu')
+  var age = document.getElementsByName('age');
+  var seibetsu = document.getElementsByName('seibetsu');
+
+  // TODO 性別の値を数値で扱うように対応
+  //ラジオボタンの値定義
+  if (otoko == true) {
+      seibetsu = "otoko";
+    } else if (onna == true) {
+      seibetsu = "onna";
+    } else {
+      seibetsu = "not"
+  }
+
+  // TODO 変数名に見直し
+  //チェックボックスの値定義
+  var ages = "";
+  for (var i = 0; i < age.length; i++) {
+    if (age[i].checked) {
+      ages != "";
+      ages = ages + ",";
+      ages = ages + age[i].value;
+    }
+  }
 
   //URLを生成する
-  var sendUrl = baseUrl + "?name=" + name + "&address=" + address + "&email=" + email + "&tel=" + tel + "&otoko=" + otoko + "&onna=" + onna + "&juu=" + juu + "&nijuu=" + nijuu + "&sanjuu=" + sanjuu + "&yonjuu=" + yonjuu;
+  var sendUrl = baseUrl + "?name=" + name + "&address=" + address + "&email=" + email + "&tel=" + tel + "&seibetsu=" + seibetsu + "&ages=" + ages;
   console.log(sendUrl);
 
-
-
+  //入力内容の確認
   var flag = 0;
 
+  // TODO 文末にはセミコロン、全体見直し
+  // TODO エラーメッセージはまとめて一回でアラート表示
+  //名前の確認
+  var res = requireCheck(name , "名前");//入力確認
+  if (res) {
 
-　　 //名前
-  	if(name == ""){
-      flag = 1;
-    }
+  } else {
 
-    else if(name.length > 10){
-      flag = 1;
-    }
+  }
+  lengthCheck(name,10);//文字数確認
 
+　//住所の確認
+  requireCheck(address , "住所")//入力確認
+  lengthCheck(address,30)//文字数確認
 
-    //住所
-    else if(address == ""){
-      flag = 1;
-    }
+  //チェック項目の確認
+  boxCheck(seibetsu , "性別" , "not")//性別入力確認
+  boxCheck(ages , "年齢" , "")//年齢入力確認
 
-    else if(address.length > 30){
-      flag = 1;
-    }
+  //メールの確認
+  requireCheck(email , "メールアドレス")//入力確認
+  typeAlphaNumCheck(email , /[^A-Za-z0-9\@.-/]+/ , "メールアドレスは半角英数")
 
-    var str="";
+  //電話番号の確認
+  requireCheck(tel , "電話番号")//入力確認
+  typeAlphaNumCheck(tel , /[^0-9]+/ , "電話番号は半角数字")
 
-      //for文でチェックボックスを１つずつ確認
-      for( i=0; i<ages.length; i++ )
-      {
-        //チェックされているか確認する
-        if( ages[i].checked )
-        {
-          //変数strが空でない時、区切りのコンマを入れる
-          if( str != "" ) str=str+",";
-
-          //チェックボックスのvalue値を変数strに入れる
-          str=str+ages[i].value;
-        }
-      }
-
-      //strが空の時、警告を出す
-      if( str=="" ){
-         alert( "年齢を選択してください。" );
-       }
-
-
-         var stra="";
-
-           //for文でチェックボックスを１つずつ確認
-           for( i=0; i<seibetsu.length; i++ )
-           {
-             //チェックされているか確認する
-             if( seibetsu[i].checked )
-             {
-               //変数strが空でない時、区切りのコンマを入れる
-               if( stra != "" ) stra=stra+",";
-
-               //チェックボックスのvalue値を変数strに入れる
-               stra=stra+seibetsu[i].value;
-             }
-           }
-
-           //strが空の時、警告を出す
-           if( stra=="" ){
-              alert( "性別を選択してください。" );
-
-
-
-       }
-
-
-
-   //メールアドレス
-    else if(email == ""){
-      flag = 1;
-    }
-
-    else if(email.match ( /[^0-9a-zA-Z_]+@+\.+/ )){ // 「メール」文字をチェック
-      flag = 1;
-    }
-
-
-　　 //電話番号
-    else if(tel == ""){ // 「電話番号」の入力をチェック
-      flag = 1;
-    }
-
-    else if(tel. match(/[^0-9]+/)){ // 「電話番号」の文字をチェック
-      flag = 1;
-    }
-
-
-    // 設定終了
-    if(flag){
-
-  		window.alert('必須項目に未入力がありました'); // 入力漏れがあれば警告ダイアログを表示
-  		return false; // 送信を中止
-
-  	}
-  	// else{
-    //
-  	// 	return true; // 送信を実行
-    //
-    //
-  	// }
-
+  // 設定終了
+  if(flag){
+    return false; // 送信を中止
+  }
 
   //URLを決める
   location.href = sendUrl;
+}
+
+// TODO return でチェック結果（true/false）で返すようにして判断する。（関数の呼び出しもとでハンドリング）他のチェック処理も同様
+//入力項目のチェック
+function requireCheck(target , x) {
+  // 必須項目のチェック
+  if (target === "") {
+    alert( x + "を入力してください。" );
+    return false;
+    // flag = 1;
+  }
+  return true;
+
+}
+
+function boxCheck(target , x , y) {
+  // 必須項目のチェック
+  if (target === y) {
+    alert( x + "を入力してください。" );
+    flag = 1;
+  }
+}
+
+function lengthCheck(target,x) {
+  // 数値チェック
+  var pt = target
+
+    if(pt.length > x){
+      alert( "名前を" + x + "文字以内で入力してください。" );
+      flag = 1;
+    }
+}
+
+function typeAlphaNumCheck(target, x , y ) {
+
+  // 半角英数値チェック
+  if (target. match( x )) {
+    alert( y + "で入力してください。" );
+    flag = 1;
+  }
+
 }

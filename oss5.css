@@ -3,7 +3,16 @@
   font-size: 30px;
 }
 
-form {
+.inform {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 500px;
+    height:700px;
+    padding: 1em;
+    border: 1px solid #CCC;
+}
+
+.conform {
     margin: 0 auto;
     margin-top: 50px;
     width: 500px;
@@ -11,6 +20,7 @@ form {
     padding: 1em;
     border: 1px solid #CCC;
 }
+
 
 div + div {
     margin-top: 50px;

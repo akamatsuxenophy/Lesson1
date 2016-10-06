@@ -1,12 +1,4 @@
 console.log('confirm.js');
-
-// 　function unload(){
-//     var pram=location.search;
-//     document.write("JavaScriptはONです。");
-//     document.write("<img src='../images/img002.gif'>");
-// document.close();
-// }
-
 // URLパラメータの取得
 var arg = new Object;
 var pair = location.search.substring(1).split('&');
@@ -20,8 +12,7 @@ var name = arg.name,
     address = arg.address;
     email = arg.email;
     tel = arg.tel;
-    otoko = arg.otoko
-    onna =arg.onna
+    seibetsu = arg.seibetsu;
     juu = arg.juu
     nijuu = arg.nijuu
     sanjuu = arg.sanjuu
@@ -36,20 +27,13 @@ document.getElementById('usertel').innerText = tel;
 //性別の分岐とテキスト変更
 var target = document.getElementById("usersex");
 
- if (otoko == "true") {
+ if (seibetsu == "otoko") {
       target.innerHTML = "男性";
-    }else if (onna == "true") {
+    }else if (seibetsu == "onna") {
       target.innerHTML = "女性";
     }else {
       target.innerHTML = "未入力";
     }
-
-
-    // if (s_val==0) {
-    //    window.alert('いずれか一つ以上を選択して下さい。');
-    //   //  return(false);
-    //    }
-
 
 
     //年齢の分岐とテキスト変更
