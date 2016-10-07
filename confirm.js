@@ -3,20 +3,18 @@ console.log('confirm.js');
 var arg = new Object;
 var pair = location.search.substring(1).split('&');
 for (var i = 0; i < pair.length; i++) {
-  var kv = pair[i].split('=');
-  arg[kv[0]]=kv[1];
+ var kv = pair[i].split('=');
+ arg[kv[0]]=kv[1];
 }
+
 
 // HTMLにパラメータの値を埋め込み
 var name = arg.name,
     address = arg.address;
     email = arg.email;
     tel = arg.tel;
-    seibetsu = arg.seibetsu;
-    juu = arg.juu
-    nijuu = arg.nijuu
-    sanjuu = arg.sanjuu
-    yonjuu = arg.yonjuu
+    sex = arg.sex;
+    age = arg.age;
 
 // テキストを変更
 document.getElementById('username').innerText = name;
@@ -27,31 +25,25 @@ document.getElementById('usertel').innerText = tel;
 //性別の分岐とテキスト変更
 var target = document.getElementById("usersex");
 
- if (seibetsu == "otoko") {
-      target.innerHTML = "男性";
-    }else if (seibetsu == "onna") {
-      target.innerHTML = "女性";
-    }else {
-      target.innerHTML = "未入力";
-    }
-
+if (sex == "1") {
+  target.innerHTML = "男性";
+}else if (sex == "2") {
+  target.innerHTML = "女性";
+}else {
+  target.innerHTML = "未入力";
+}
 
     //年齢の分岐とテキスト変更
- var targeta = document.getElementById("userage");
-    if (juu == "true") {
-        targeta.innerHTML += "１０代";
-      }
-    if (nijuu == "true") {
-        targeta.innerHTML += "２０代";
-      }
-    if (sanjuu == "true") {
-        targeta.innerHTML += "３０代";
-      }
-    if (yonjuu == "true") {
-        targeta.innerHTML += "４０代";
-      }
-
-// debugger;
-
-console.log(name);
-console.log(tel);
+var targeta = document.getElementById("userage");
+if (~age .indexOf('10')) {
+  targeta.innerHTML += "１０代 ";
+}
+if (~age .indexOf('20')) {
+  targeta.innerHTML += "２０代 ";
+}
+if (~age .indexOf('30')) {
+  targeta.innerHTML += "３０代 ";
+}
+if (~age .indexOf('40')) {
+  targeta.innerHTML += "４０代 ";
+}

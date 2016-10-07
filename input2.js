@@ -31,8 +31,8 @@ function btnClick(){
 　//４０代か
   var yonjuu = document.getElementById('yonjuu').checked;
 
-  var ages = document.getElementsByName('age')
-  var seibetsu = document.getElementsByName('seibetsu')
+  var ages = document.getElementsByName('age');
+  var seibetsu = document.getElementsByName('seibetsu');
 
   //URLを生成する
   var sendUrl = baseUrl + "?name=" + name + "&address=" + address + "&email=" + email + "&tel=" + tel + "&otoko=" + otoko + "&onna=" + onna + "&juu=" + juu + "&nijuu=" + nijuu + "&sanjuu=" + sanjuu + "&yonjuu=" + yonjuu;
