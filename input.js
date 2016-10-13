@@ -1,16 +1,4 @@
 console.log('input.js');
-
-// TODO インデントは再度見直し///
-// TODO チェックボックスの値はclassで配列で取得して判定する///
-// TODO document.getElementsByName('age')で取得した配列をループさせてチェックする（性別も同様）///
-// TODO 性別の値を数値で扱うように対応///
-// TODO 変数名に見直し///
-// TODO 文末にはセミコロン、全体見直し///
-// TODO エラーメッセージはまとめて一回でアラート表示///
-// TODO return でチェック結果（true/false）で返すようにして判断する。（関数の呼び出しもとでハンドリング）///
-
-
-
 function btnClick() {
 
   var result = true;
@@ -29,13 +17,10 @@ function btnClick() {
   //性別取得
   var seibetsu = document.getElementsByName('seibetsu');
 
-
   //チェックボックスの値定義ー性別
 　var sex = "";
 　for (var i = 0; i < seibetsu.length; i++) {
     if (seibetsu[i].checked) {
-      //sex = sex + ",";
-      //sex = sex + seibetsu[i].value;
       sex = seibetsu[i].value;
       break;
     }
@@ -46,45 +31,51 @@ function btnClick() {
       tmpAge = [];
   for (var i = 0; i < ages.length; i++) {
     if (ages[i].checked) {
-      // age = age + ",";
-      // age = age + ages[i].value;
       tmpAge.push(ages[i].value);
     }
   }
   age = tmpAge.join(',');
   console.log(age);
 
-  //エラーメッセージの値
-  var wd = ""
+  //アラートの表示変数
+  var wr = "";
+  var wl = "";
+  var wt = "";
 
   // チェック結果を格納する配列
   var res = [];
+  var errMsg = '';
+  var errMsg2 = [];
 
   //名前の確認
-  res.push(requireCheck(name));
-  res.push(lengthCheck(name,10));
 
+  var res1 = requireCheck(name , "名前", );
+  if (!res1) {
+    errMsg = name + "が入力されていません。\n";
+  }
+  res.push(res1);
+
+
+  res.push(requireCheck(name , "名前"));
+  res.push(lengthCheck(name , 10 , "名前"));
 　//住所の確認
-　res.push(requireCheck(address));
-　res.push(lengthCheck(address,30));
-
+　res.push(requireCheck(address , "住所"));
+　res.push(lengthCheck(address, 30 , "住所"));
   //チェック項目の確認
-　res.push(requireCheck(sex));
-　res.push(requireCheck(age));
-
+　res.push(requireCheck(sex , "性別"));
+　res.push(requireCheck(age , "性別"));
   //メールの確認
-  res.push(requireCheck(email));
-  res.push(typeAlphaNumCheck(email , /[^A-Za-z0-9\@.-/]+/));
-
+  res.push(requireCheck(email , "メールアドレス"));
+  res.push(typeAlphaNumCheck(email , /[^A-Za-z0-9\@.-/]+/ , "メールアドレス" , "半角英数"));
   //電話番号の確認]
   res.push(requireCheck(tel , "電話番号"));
-  res.push(typeAlphaNumCheck(tel , /[^0-9]+/));
+  res.push(typeAlphaNumCheck(tel , /[^0-9]+/ , "電話番号" , "半角数字"));
   console.log(res);
 
 　//true・falseの確認
   for(var i = 0; i < res.length; i++){
    if(res[i] === false){
-     alert("入力に誤りがあります。" +  wd);
+     alert(wr + wl + wt);
      return false;
    }
   }
@@ -98,29 +89,34 @@ function btnClick() {
 }
 
 //入力項目のチェック
-function requireCheck(target) {
+function requireCheck(target , x) {
+
+  var hoge = '';
+
   // 必須項目のチェック
   if (target === "") {
+    // wr = x + "が入力されていません。\n";
     return false;
-    wd = + "入力してない項目があります。";
   } else {
     return true;
   }
 }
 
-function lengthCheck(target,x) {
+function lengthCheck(target,x , y) {
   // 数値チェック
   var tv = target;
-    if(tv.length > x){
-      return false;
+  if(tv.length > x){
+    wl += y + "は" + x + "以内で入力してください。\n";
+    return false;
     } else {
       return true;
     }
 }
 
-function typeAlphaNumCheck(target, x) {
+function typeAlphaNumCheck(target, x , y , z) {
   // 半角英数値チェック
   if (target.match( x )) {
+    wt += y + "は" + z + "で入力してください。\n";
     return false;
   } else {
     return true;
