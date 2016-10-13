@@ -37,52 +37,92 @@ function btnClick() {
   age = tmpAge.join(',');
   console.log(age);
 
-  //アラートの表示変数
-  var wr = "";
-  var wl = "";
-  var wt = "";
-
   // チェック結果を格納する配列
   var res = [];
   var errMsg = '';
-  var errMsg2 = [];
+  // var errMsg2 = [];
 
   //名前の確認
 
-  var res1 = requireCheck(name , "名前", );
-  if (!res1) {
-    errMsg = name + "が入力されていません。\n";
-  }
+  var isValid = true;
+
+  var res1 = requireCheck(name);
+  var res2 = lengthCheck(name , 10);
+
+  var res3 = requireCheck(address);
+  var res4 = lengthCheck(address , 30);
+
+  var res5 = requireCheck(sex);
+  var res6 = requireCheck(age);
+
+  var res7 = requireCheck(email);
+  var res8 = typeAlphaNumCheck(email , /[^A-Za-z0-9\@.-/]+/);
+
+  var res9 = requireCheck(tel);
+  var res10 = typeAlphaNumCheck(tel , /[^0-9]+/);
+
+
   res.push(res1);
+  res.push(res2);
+  res.push(res3);
+  res.push(res4);
+  res.push(res5);
+  res.push(res6);
+  res.push(res7);
+  res.push(res8);
+  res.push(res9);
+  res.push(res10);
 
 
-  res.push(requireCheck(name , "名前"));
-  res.push(lengthCheck(name , 10 , "名前"));
-　//住所の確認
-　res.push(requireCheck(address , "住所"));
-　res.push(lengthCheck(address, 30 , "住所"));
-  //チェック項目の確認
-　res.push(requireCheck(sex , "性別"));
-　res.push(requireCheck(age , "性別"));
-  //メールの確認
-  res.push(requireCheck(email , "メールアドレス"));
-  res.push(typeAlphaNumCheck(email , /[^A-Za-z0-9\@.-/]+/ , "メールアドレス" , "半角英数"));
-  //電話番号の確認]
-  res.push(requireCheck(tel , "電話番号"));
-  res.push(typeAlphaNumCheck(tel , /[^0-9]+/ , "電話番号" , "半角数字"));
-  console.log(res);
-
-　//true・falseの確認
-  for(var i = 0; i < res.length; i++){
-   if(res[i] === false){
-     alert(wr + wl + wt);
-     return false;
-   }
+  if (!res1) {
+    isValid = false;
+    errMsg = errMsg + "名前が入力されていません。\n";
+  }
+  if (!res2) {
+    isValid = false;
+    errMsg = errMsg + "名前は10文字以内で入力して下さい。\n";
+  }
+  if (!res3) {
+    isValid = false;
+    errMsg = errMsg + "住所が入力されていません。\n";
+  }
+  if (!res4) {
+    isValid = false;
+    errMsg = errMsg + "住所は30文字以内で入力して下さい。\n";
+  }
+  if (!res5) {
+    isValid = false;
+    errMsg = errMsg + "性別が選択されていません。\n";
+  }
+  if (!res6) {
+    isValid = false;
+    errMsg = errMsg + "年齢が選択されていません。\n";
+  }
+  if (!res7) {
+    isValid = false;
+    errMsg = errMsg + "メールアドレスが入力されていません。\n";
+  }
+  if (!res8) {
+    isValid = false;
+    errMsg = errMsg + "メールアドレスは半角英数で入力して下さい。\n";
+  }
+  if (!res9) {
+    isValid = false;
+    errMsg = errMsg + "電話番号を入力して下さい。\n";
+  }
+  if (!res10) {
+    isValid = false;
+    errMsg = errMsg + "電話番号は半角数字で入力して下さい。\n";
+  }
+  if (!isValid) {
+  alert(errMsg);
+  return;
   }
 
   //URLを生成する
   var sendUrl = baseUrl + "?name=" + name + "&address=" + address + "&email=" + email + "&tel=" + tel + "&age=" + age + "&sex=" + sex;
   console.log(sendUrl);
+  console.log(errMsg);
 
   //URLを決める
   location.href = sendUrl;
@@ -90,12 +130,8 @@ function btnClick() {
 
 //入力項目のチェック
 function requireCheck(target , x) {
-
-  var hoge = '';
-
   // 必須項目のチェック
   if (target === "") {
-    // wr = x + "が入力されていません。\n";
     return false;
   } else {
     return true;
@@ -106,7 +142,6 @@ function lengthCheck(target,x , y) {
   // 数値チェック
   var tv = target;
   if(tv.length > x){
-    wl += y + "は" + x + "以内で入力してください。\n";
     return false;
     } else {
       return true;
@@ -116,7 +151,6 @@ function lengthCheck(target,x , y) {
 function typeAlphaNumCheck(target, x , y , z) {
   // 半角英数値チェック
   if (target.match( x )) {
-    wt += y + "は" + z + "で入力してください。\n";
     return false;
   } else {
     return true;
