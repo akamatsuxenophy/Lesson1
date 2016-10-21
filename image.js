@@ -1,46 +1,36 @@
-function pandaClick(){
-  imgClick("panda.jpeg");
-}
+function imgClick(e){
+  var img = e.target;
+  var aTag = img.parentElement.previousElementSibling;
+  var bTag = img.parentElement.nextElementSibling;
 
-function kirinClick(){
-   imgClick("kirin.jpeg");
-}
+  var zName = aTag.innerHTML;
+  var zText = bTag.innerHTML;
 
-function koaraClick(){
-  imgClick("koara.jpeg");
-}
-
-
-function kangaruClick(){
-  imgClick("kangaru.jpeg");
-}
-
-function kabaClick(){
-  imgClick("kaba.jpeg");
-}
-
-function lionClick(){
-  imgClick("lion.jpeg");
-}
-
-function washiClick(){
-  imgClick("wasi.jpeg");
-}
-
-function kuziraClick(){
-  imgClick("kuzira.jpeg");
-}
-
-function kumaClick(){
-  imgClick("kuma.jpeg");
-}
-
-function imgClick(target){
   document.getElementById('clear').style.display = "block";
-  document.getElementById('himg').src = target;
+  document.getElementById('zoomBox').style.display = "block";
+  document.getElementById('hname').innerHTML = zName;
+  document.getElementById('himg').src = img.src;
+  document.getElementById('htext').innerHTML = zText;
+
+  window_load()
 }
 
 function clearClick(){
   document.getElementById('clear').style.display = "none";
+  document.getElementById('zoomBox').style.display = "none";
+}
 
+window.onresize = window_load;
+
+function window_load() {
+	var sW = window.innerWidth;
+	var sH = window.innerHeight;
+
+  var zbH = zoomBox.clientHeight;
+  var zbW = zoomBox.clientWidth;
+
+	document.getElementById("clear").style.width = sW + "px";
+  document.getElementById("clear").style.height = sH + "px";
+  document.getElementById("zoomBox").style.top = (sH - zbH) / 2 + "px";
+  document.getElementById("zoomBox").style.left = (sW - zbW) / 2 + "px";
 }
