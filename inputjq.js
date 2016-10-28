@@ -7,18 +7,15 @@ $('.button').on('click', function(e){
 
 
   // 入力データを取得する
-
-  // TODO jQUeryのセレクタ
-  //var name = $('#name').val();//←これで全部統一
-
-  var name = $(':text[id="name"]').val();
+  //名前を取得
+  var name = $('#name').val();
   // 住所を取得
-  var address = $(':text[id="address"]').val();
+  var address = $('#address').val();
   // メアド取得
-  var email = $(':text[id="email"]').val();
+  var email = $('#email').val();
 　//電話番号取得
-  var tel = $(':text[id="tel"]').val();
-    //性別取得
+  var tel = $('#tel').val();
+  //性別取得
   var sex = $(':radio[name="seibetsu"]:checked').val();
   //年齢取得
   var age= [];//配列にして格納
@@ -31,13 +28,6 @@ $('.button').on('click', function(e){
   //アラート文章格納
   var errMsg = '';
   var isValid = true;
-
-  // var formValues = {
-  //   'name': name,
-  //   'address': address,
-  //   'emai': email
-  // };
-  //
 
 
   var res1 = requireCheck(name);
@@ -54,18 +44,6 @@ $('.button').on('click', function(e){
 
   var res9 = requireCheck(tel);
   var res10 = typeAlphaNumCheck(tel , /[^0-9]+/);
-
-  // TODO 不要であれば削除
-  res.push(res1);
-  res.push(res2);
-  res.push(res3);
-  res.push(res4);
-  res.push(res5);
-  res.push(res6);
-  res.push(res7);
-  res.push(res8);
-  res.push(res9);
-  res.push(res10);
 
 
   if (!res1) {
