@@ -346,7 +346,7 @@
 
 
 //null型
-
+  
   typeof null;  //typeofの結果は'object'
   object
 

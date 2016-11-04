@@ -1,9 +1,9 @@
-//JSの言語仕様
+//JSの言語
 
-js> var s = 'foobar'; //説明のためのコメント
+var s = 'foobar'; //説明のためのコメント
 続行結果(あるいは式の評価結果)
 
-js> x;
+x;
 typein:1: ReferenceError: x is not defind
 
 
@@ -17,7 +17,7 @@ var print = console.log;
 
 
 //変数の基礎
-  js> var foo; //変数fooを宣言
+  var foo; //変数fooを宣言
 
   foo = "abc"; //変数fooに文字列値"abc"を代入
 
