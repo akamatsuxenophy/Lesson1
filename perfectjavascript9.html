@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <meta charset = "UTF-8">
+    <title>Sample Page</title>
+    <link rel="stylesheet" type="text/css" hrel="/css/sample.css">
+        <!-- 外部javascriptファイルの読み込み -->
+    <script src="perfectjavascript9.js"></script>
+  </head>
+  <!-- onLoadイベントハンドラ -->
+  <body>
+    <!-- 9章 -->
+    <div><!-- divの開始タグ -->
+      <p></p><!-- pの終了タグは省略可能 -->
+      <input type="button"><!-- inputは開始タグだけで終了タグはない -->
+    </div><!-- divの終了タグ -->
+
+    <!-- 同一のIDが存在する場合のgetElementById()メソッド -->
+    <div id="foo">first</div>
+    <div id="foo.">second</div>
+    <script>
+      var element = document.getElementById('foo');
+      alert(element.innerHTML); // => ほとんどのブラウザではfirstになる。しかし仕様としては不安定である
+    </script>
+
+    <!-- getElementById()とgetElementByTagName() -->
+    <p id="foo3">
+      <span>a</span>
+      <span>b</span>
+      <span>c</span>
+    </p>
+    <p id="bar">
+      <span>x</span>
+    </p>
+    <script>
+      var foo3 = document.getElementById('foo3');
+      // ElementオブジェクトにgetElementById()メソッドは存在しない
+      alert(foo3.getElementById) //=> undefined
+      // ElementオブジェクトにgetElementsByTagName()メソッドは存在する
+      alert(foo3.getElementsByTagName)  //=> function getElementsByTagName() {
+        // [native code]}
+      // foo3の子孫ノードの中からspan要素を取得する
+      var fooSpans = foo.getElementsByTagName('span');
+      alert(fooSpans.length); //=> 3
+      //ドキュメント全体からspan要素を取得する
+      var allSpan = document.getElementsByTagName('span');
+      alert(allSpans.length); //=> 4
+    </script>
+
+    <!-- ライブオブジェクト -->
+    <div id="foo4">
+      <span>first</span>
+      <span>second</span>
+    </div>
+    <script>
+      var elems = document.getElementsByTagName('span');
+      alert(elems.length);  // => 2
+      newSpan.appendChild(newSpan);
+      alert(elems.length);  // => 3
+    </script>
+
+    <!-- ライブオブジェクト -->
+    <div>sample text</div>
+    <script>
+      var dive = document.getElementsByTagName('div');
+      var newDiv;
+      for (var i = 0; i < divs.length; i++) {
+        newDiv = document.createElement('div');
+        newDiv.appendChild(document.createTextNode('new div'));
+        divs[i].appendChild(newDiv);
+      }
+    </script>
+
+    <!-- ライブオブジェクトの罠回避 -->
+    <div>sample text</div>
+    <script>
+      var divs = document.getElementsByTagName('div');
+      var newdiv;
+      //divs.lengthを最初に取得しておきそれをループの継続条件に使う
+      for (var i = 0, len = divs.length; i < len; i++) {
+        newDiv = document.createElement('div');
+        newDiv.appendChild(document.createTextNode('new div'));
+      }
+    </script>
+
+
+    <!-- NodeListの操作方法によるパフォーマンスの違い -->
+    <div>
+      <!-- <span>タグを1000個記述する -->
+    </div>
+    <script>
+      var elems, len;
+      //NodeListをそのまま使用 + 毎回lengthを取得
+      console.time('NodeListをそのまま使用 + 毎回lengthを取得');
+      elems = document.getElementsByTagName('span');
+      for (var i = 0; i < 1000; i++) {
+        for (var j = 0; j < elems.length; j++) {
+          elems[j];
+        }
+      }
+
+      console.timeEnd('NodeListをそのまま使用　+ 毎回lengthを取得');
+      //NodeListをそのまま使用
+      console.time('NodeListをそのまま使用');
+      elems = document.getElementsByTagName('span');
+      len = elems.length;
+      for (var i = 0; i < 1000; i++) {
+        for (var j = 0; j < len; j++) {
+        }
+      }
+
+      console.timeEnd('NodeListをそのまま使用');
+      //Arrayに変換してから使用 + 毎回lengthを取得
+      console.time('Arrayに変換してから使用 + 毎回lengthを取得');
+      // Internet Explorer　8以前ではエラー
+      elems = Array.prototype.slice.call(document.getElementsByTagName('span'));
+      for (var i = 0; i < 1000; i++) {
+        for (var j = 0; j < elems.length; j++) {
+          elems[j];
+        }
+      }
+
+      console.timeEnd('Arrayに変換してから使用 + 毎回lengthを取得');
+      //Arrayに変化してから使用
+      console.time('Arrayに変換してから使用');
+      //Internet Explorer 8以前ではエラー
+
+      // NodeListの操作方法によるパフォーマンスの違い
+      elems = Array.prototype.slice.call(document.getElementsByTagName('span'));
+      len = elems.length;
+      for (var i = 0; i < 1000; i++) {
+        for (var j =0; j < len; j++) {
+          elems[j];
+        }
+      }
+      console.timeEnd('Arrayに変換してから使用');
+      </script>
+
+
+      <!-- クラスによる名前の検索getElementsByTagName()メソッド -->
+      <p id="foo5">
+        <span class="matched">a</span>
+        <span class="matched unmatched">b</span>
+        <span class="unmatched">c</span>
+      </p>
+      <p id="bar2">
+        <span class="matched">x</span>
+      </p>
+      <script>
+        var foo5 = document.getElementById('foo5');
+        //foo5の子孫ノードの中からクラスにmatchedが指定されている要素を取得する
+        var foo5Matched =foo5.getElementsByTagName('matched');
+        alert(foo5Matched.legth); // => 2
+        //複数のクラス名を指定する場合は空白区切で指定する
+        alert(foo5.getElementsByClassName('matched unmatched').length); // => 1
+        //複数指定する場合、クラス名の重ん版は考慮されない
+        alert(foo5.getElementsByClassName('unmatched matched').length); // => 1
+        //ドキュメント全体からクラス名にmatchedが指定されている要素を取得する
+        var allMatched = document.getElementsByClassName('mached');
+        alert(allMatched.length); // => 3
+      </script>
+
+      <!-- 親・子・兄弟 -->
+      <div id="a">
+        <div id="b"></div>
+        <div id="my">
+          <div id="c">
+            <div id="d"></div>
+          </div>
+          <div id="e"></div>
+        </div>
+        <div id="f"></div><div id="g"></div>
+      </div>
+      <script>
+        var my = document.getElementById('my');
+        var elem;
+        elem =my.parentNode;
+        alert(elem.id); // => 'a'
+
+        //子要素
+        elem = my.firstChild;
+        alert(elem.id); // undefined  //空白ノードが選択されている
+        elem = elem.nextSibiling;
+        alert(elem.id); // => c
+        elem = my.lastChild;
+        alert(elem.id); // => undefined  //空白ノードが選択されている
+        elem = elem.previousSibiling;
+        alert(elem.id); // => e
+        var children = my.childNodes;
+        alert(children[0].id);  // => undefined //空白ノードが選択されている
+        alert(children[1].id);  // => 'c'
+        alert(children[2].id);  // => undefined //空白ノードが選択されている
+        alert(children[3].id);  // => 'e'
+
+        //兄要素
+        elem = my.previousSibiling.previousSibiling;
+        alert(elem.id); // =>'b'
+        elem = my.nextSibiling.nextSibiling;
+        alert(elem.id); // =>'f'
+        elem = elem.nextSibiling;
+        alert(elem.id); // => 'g'  //div#fとdiv#gの間には空白や改行はないので
+                                   //div#fのnextSibilingはdiv#gになる
+      </script>
+
+
+      <!-- 関数要素を参照するためのプロパティ使用例 -->
+      <div id="h">
+        <div id="i"></div>
+        <div id="my-id">
+          <div id="j">
+              <div id="k"></div>
+          </div>
+          <div id="l"></div>
+        </div>
+        <div id="m"></div><div id="n"></div>
+      </div>
+      <script>
+        var my = document.getElementById('my-id');
+        var elem;
+        elem = my.parentNode;
+        alert(elem.id); // => 'h'
+        //子要素
+        elem = my.firstElementChild;
+        alert(elem.id); // => 'j'
+        alem = my.lastElementChild;
+        alert(elem.id); // => 'l'
+        var children = my.children;
+        alert(children[0].id);  // => 'j'
+        alert(children[1].id);  // => 'l'
+
+        //兄弟要素
+        elem = my.previousElementSibiling;
+        alert(elem.id); // => 'b'
+        elem = my.nextElementSibiling;
+        alert(elem.id); // => 'm'
+        elem = elem.nextElementSibiling;
+        alert(elem.id); // => 'n'
+      </script>
+
+
+      <!-- XPathの対象HTML構造 -->
+      <div id="main">
+        <p class="content">
+          <a class="link" href="#">1st link</a>
+        </p>
+        <p class="dummy"></p>
+        <p class="content">
+          <a href="#">2nd link</a>
+        </p>
+        <p class="content">
+          <a href="#">3rd link</a>
+          <a href="#">4th link</a>
+        </p>
+        <a href="#">5th</a>
+      </div>
+
+
+      <!-- XPathの使用例 -->
+      <script>
+        var result = document.evaluate(
+          //idがmainのdiv  /classにcontentを含むp要素の3番目　/hrefがa要素
+          //div[@id='main']/p[contains(@class, "content")][3]/a[starts-with(
+          //@href, http://~)],
+          document,
+          null,
+          XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+          null
+        );
+        alert(result.snapshotLength); // => 1
+        var elem = result.anapshotItem(0);
+        alert(elem.inerHTML); // => 4th link
+      </script>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

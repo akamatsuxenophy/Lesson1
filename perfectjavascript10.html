@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <meta charset = "UTF-8">
+    <title>Sample Page</title>
+    <link rel="stylesheet" type="text/css" hrel="/css/sample.css">
+        <!-- 外部javascriptファイルの読み込み -->
+    <script src="perfectjavascript10.js"></script>
+  </head>
+  <body>
+  <!-- 10章 -->
+  <!-- イベントハイドラでfalseを返す -->
+  <script>
+    function stop(event) {
+      alert('Stop page transfer');
+      return false;
+    }
+  </script>
+  <a id="foo" href="#" onclick="return stop();">example.com</a>
+
+  <!-- イベントの伝播 -->
+  <div id="fooa">
+    <button id="bara">sample</button>
+  </div>
+
+
+  <!-- previentDefault()メソッドの例 -->
+  <a id="foob" href="#"></a>
+  <script>
+    var link = document.getElementById('foo');
+    function sayFoo(event) {
+      alert('foo');
+      event.preventDefault();
+    }
+    link.addEventListener('click', sayFoo, false);
+    // preventDefault()でデフォルトの動作がキャンセルされているため、ページ遷移することはない
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

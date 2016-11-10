@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <meta charset = "UTF-8">
+    <title>Sample Page</title>
+    <link rel="stylesheet" type="text/css" hrel="/css/sample.css">
+        <!-- 外部javascriptファイルの読み込み -->
+    <script src="perfectjavascript8.js"></script>
+  </head>
+  <!-- onLoadイベントハンドラ -->
+  <body onLoad="alert('hello')">
+    <img src= "america.jpeg">
+
+
+<!-- 操作できない要素 -->
+    <div id="a"></div>
+    <script>
+      var a = document.getElementById('a');
+      alert(a !== null);  //=>true
+      var b = document.getElementById('b');
+      alert(b !== null);  //=>false
+    </script>
+    <div id="b"></div>
+
+
+    <!-- すべての要素を操作可能にする方法 -->
+    <div id="c"></div>
+    <script>
+      var a = document.getElementById('a');
+      alert(a !== null);  //=>true
+      var b = document.getElementById('b');
+      alert(b !== null);  //=>true
+    </script>
+  </body>
+</html>
