@@ -1,0 +1,107 @@
+
+<!-- ライブラリ -->
+
+
+<!-- JQueryの基本 -->
+<!DOCTYPE HTML>
+<html>
+  <head></head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <button class="foo">このボタンがクリックされた時にリンクを追加する</button>
+    <button class="foo">このボタンでは反応しない</button>
+    <script>
+      //class="foo"の最初のbutton要素がクリックされた時の処理を設定する
+      $('button.foo: first').click(function () {
+        $('<div><a></a></div>')
+
+        .find('a')
+          .text('jQuery.com')
+          .attr('href', 'http://jQuery.com')
+        .end()
+
+        .appendTo('body')
+      });
+    </script>
+
+
+      <!-- jQueryを利用しない例 -->
+      <button class="foo">このボタンがクリックされた時にリンクを追加する</button>
+      <button class="foo">このボタンでは反応しない</button>
+      <script>
+      //クリックされた時に続行される処理
+      var onClick = function() {
+        var div = document.createElement('div');
+        var a = document.createElement('a');
+        a.appendChild(document.createTextNode('jQuery.com'));
+        a.href = 'http://jQuery.com';
+        div.appendChild(a);
+        document.body.appendChild(div);
+      };
+
+      //getElementsByTagName()すべてのbutton要素を取得する
+      var button = document.getElementsByTagName('button');
+      //取得されたbutton要素の中でクラスにfooを含む最初の要素に
+      //クリックイベントに対するイベントリスナを設定する
+      for (var i = 0, len = buttons.length; i < len; i++) {
+        if(buttons[i].className.match(/(^|¥s)foo(¥s|$)/)) {
+          buttons[i].addEventListener('click', onclick, false);
+          break;
+        }
+      }
+    </script>
+
+
+      <!-- jQueryに夜イベントリスナの登録 -->
+      <div class="foo2">foo2</div>
+      <div class="bar2">bar2</div>
+      <div class="baz2">baz2</div>
+      <script>
+      // clickイベントリスナを登録する
+      $('foo2').bind('click', function() {
+          $(this).text('Hi!');
+        });
+        //複数のイベントリスナを一括で登録する
+        $('.bar').bind({
+          'mouseover': function() {
+            $(this).text('Hi!');
+        },
+        'mouseout': function() {
+          $(this).text('Bye!');
+        }
+      });
+      //bazがクリックされた時、barのmouseoutイベントのイベントリスナを削除する
+      $('.baz').bind('click', function() {
+        $('.bar').unbind('mouseout');
+      });
+    </script>
+
+
+
+    <!-- イベント専用のイベントリスナ登録メソッド -->
+    <div class="foo">Click Me!</div>
+    <div class="bar">Double Click Me!</div>
+    <script>
+      // clickイベントにイベントリスナを登録する
+      $('.foo').click({message: 'Hello'}, function(event) {
+        alert(event.data.message);   // => Hello!　とアラート表示される
+      });
+      //.barがダブルクリックされた時に.fooのclickイベントを発火する
+      $('.bar').dblclick(function() {
+        $('.foo').click();
+      });
+    </script>
+  </body>
+</html>
+
+
+
+<!-- jQueryプラグインの利用 -->
+<!-- <html lang="ja">
+<head>
+  <meta charset="stylesheet" type="text/css" href="#">
+  <!- jQuery本体を先に読み込む -->
+  <!-- <script src="jquery.js"></script>
+  <!- jQueryよりも後にtyosyプラグインのファイルを読み込む -->
+  <!-- <script src="typsy.js"></script> -->
