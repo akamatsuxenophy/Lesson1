@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <meta charset = "UTF-8">
+    <title>perfectjavascript15</title>
+    <link rel="stylesheet" type="text/css" href="pjs15.css"/>
+  </head>
+  <body>
+    <ur>
+      <li draggable="true">Seiitiro Inoue</li>
+      <li draggable="true">Shota Hamabe</li>
+      <li draggable="true">Takuro Tsuchie</li>
+    </ur>
+
+    <div id="drophere">Drop Here</div>
+
+    <script>
+      //ドロップ領域
+      var drophere = document.getElementById('drophere');
+
+      //ドラッグ要素がドロップ領域上にある時
+      drophere.ondragover = function(event) {
+        for(var i = 0; i < event.dataTransfer.types.length; i++) {
+          if(event.dataTransfer.types[i] === 'text/plain') {
+            //ブラウザのデフォルト動作をキャンセル
+            event.preventDefault();
+            break;
+          }
+        }
+      };
+
+      //ドラッグ要素がドロップ領域にドロップされた時
+      drophere.ondrop = function(event) {
+        //ブラウザのデフォルト動作をキャンセル
+        event.preventDefault();
+
+        //ドラッグされたデータを取得
+        var yourName = event.dataTransfer.getData('text/plain');
+        alert('Hello, ' + yourName + '!');
+      };
+    </script>
+
+
+    <!-- dataTransfer.addElementの例 -->
+    <div id="container">
+      <div id="handler" draggable="true">handler</div>
+    </div>
+
+    <script>
+      var container = document.getElementById('container');
+          handler = document.getElementById('handler');
+
+      //handlerのdラッグ開始
+      handler.ondragstart = function(event) {
+
+        //ドラッグイメージとしてcontainerのキャプチャ画像を指定する
+        event.dataTransfer.addElement(container);
+      };
+    </script>
+
+
+    <!-- dataTransfer.setDragImageの利用例 -->
+    <img id="dragimage" src="panda.jpeg" style="visibility:hidden; position:abusolute;">
+    <div id="dragme">Drag Me</div>
+
+    <script>
+      document.getElementById('dragme').ondragstart = function(event) {
+        var dragimage = document.getElementById('dragimage'),
+            offsetX = dragimage.offsetWidth / 2,
+            offsetY = dragimage.offsetHeight / 2;
+
+            //ドラッグイメージを指定する
+            event.dataTransfer.setDragImage(dragimage, offsetX, offsetY);
+      };
+    </script>
+
+
+    <!-- //ドラッグ操作によるファイルのダウンロード -->
+    <a href="http://www.example.com/foo.mp3"
+       data-downloadurl="audio/mpeg:foo.mp3:http://example.com/foo.mp3"
+       class="dragout" draggable="true">download</a>
+
+    <a href="http://www.example.com/bar.pdf"
+             data-downloadurl="application/pdf:bar.pdf:http://example.com/bar.pdf"
+             class="dragout" draggable="true">download</a>
+    <script>
+      //dragoutクラスの要素をすべて取得
+      var files = document.querySelectorAll('dragout');
+      for(var i = 0, file; file = files[i]; i++) {
+        file.addEventListener('dragstart', function(event) {
+          //DownloadURL形式でデータをセットする
+          event.dataTransfer.setData('DownloadURL', this.dataset.Downloadurl);
+        }, false);
+      }
+    </script>
+
+
+    <script src="perfectjavascript15.js"></script>
+  </body>
+</html>

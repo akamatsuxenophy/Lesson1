@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html manifest = "sample.appcahe">
+  <head>
+    <meta charset="UTF-8">
+    <script src="perfectjavascript14.js"></script>
+    <link rel="stylesheet" href="perfectjavascript14.css">
+    <title>perfectjavascript14</title>
+  </head>
+  <body>
+    <h1>perfectjavascript14</h1>
+    <img src="#">
+
+
+    <!-- ネットワーク接続状態の通知 -->
+    <p>The network is: <span id="indicator">(state unknown)</span></p>
+    <script>
+      //ネットワーク接続状態の更新
+      function updateIndicator() {
+        var indicator = document.getElementById('indicator');
+        indicator.textContent = navigator.onLine ? 'online' : 'offline';
+      }
+
+      // bodyの各種イベントハイドラを設定する
+      document.body.onload = updateIndicator;
+      document.body.ononline = updateIndicator;
+      document.body.onoffline = updateIndicator;
+    </script>
+  </body>
+</html>

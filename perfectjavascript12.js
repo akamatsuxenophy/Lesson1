@@ -237,7 +237,7 @@ $.when($.get('/foo'), $.get('/bar'))
     }
   }
 
-  $.fnmyplugin.defaults = {
+  $.fn.myplugin.defaults = {
     foo: 'bar'
   }
   $.fn.myplugin.setting = {}
@@ -245,9 +245,9 @@ $.when($.get('/foo'), $.get('/bar'))
 
 //上のプラグイン実行
 $('selector')
-  .myplugin({foo: 'baz'});  //プラグインの設定
+  .myplugin({foo:'baz'});  //プラグインの設定
   .myplugin('someMethod');  //someMethodを実行
 
 
 
-  
+//Ajaxのところからふくしゅ

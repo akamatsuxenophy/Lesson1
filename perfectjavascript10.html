@@ -36,24 +36,28 @@
     // preventDefault()でデフォルトの動作がキャンセルされているため、ページ遷移することはない
   </script>
 
+  <span id="emulator" style="display:inline-box;border:1px solid black;background:gray">
+emulate event
+</span>
+
+<script>
+
+var elm = document.getElementById("emulator");
 
 
+//カスタムイベント(custome_event)にイベントハンドラ登録
+elm.addEventListener("custom_event", function(){
+  alert("custom event fire!!");
+}, false);
 
 
+//独自イベントの例
+elm.addEventListener("mouseenter", function(){
+  var customEvent = document.createEvent("HTMLEvents");
+  customEvent.initEvent("custom_event", true, false);
+  this.dispatchEvent(customEvent);
+}, false);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
   </body>
 </html>
