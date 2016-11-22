@@ -43,18 +43,19 @@
 
     <!-- dataTransfer.addElementの例 -->
     <div id="container">
-      <div id="handler" draggable="true">handler</div>
+      <div id="handler">handler</div>
     </div>
 
     <script>
-      var container = document.getElementById('container');
+      var containers = document.getElementById('container');
           handler = document.getElementById('handler');
 
       //handlerのdラッグ開始
       handler.ondragstart = function(event) {
 
         //ドラッグイメージとしてcontainerのキャプチャ画像を指定する
-        event.dataTransfer.addElement(container);
+        event.dataTransfer.addElement(containers);
+        console.log(containers);
       };
     </script>
 
@@ -91,6 +92,41 @@
           //DownloadURL形式でデータをセットする
           event.dataTransfer.setData('DownloadURL', this.dataset.Downloadurl);
         }, false);
+      }
+    </script>
+
+
+    <!-- 画像ファイル選択がダイアログの実装例 -->
+    <input type="file" accept="image/*" id="selectFile">
+    <script>
+      document.getElementById('selectFile').onchange = function(event) {
+        //選択した画像のfileオブジェクトを取得
+        debugger;
+        var file = event.targetfiles[0];
+
+        //ファイルの情報を取得
+        alert(file.name + 'を選択しました')
+      }
+    </script>
+
+
+    <!-- 読み込み中のプログレスバー実装例 -->
+    <div id="progWrap" style="width:200px; height:30px; background:glay;">
+      <div id="progBar" style="width:0; height:30px; background:green;"></div>
+    </div>
+
+    <script>
+      function readFile(file) {
+        var reader = new FileReader();
+        reader.onprogress = function(event) {
+          //ファイル長が計算可能な場合
+          if(event.lengthComputable) {
+            //進捗を計算してプログレスバーの幅を更新する
+            var loader = (event.loaded / event.total);
+            progBar.style.wigth = progWrap.offsetWidth * loaded + 'px';
+          }
+        };
+        reader.readAsText(file);
       }
     </script>
 

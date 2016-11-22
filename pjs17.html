@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>pjs17</title>
+  </head>
+  <body>
+    <!-- ストリーミング実装例(クライアントページ) -->
+    <!-- <iframe id="iframe_streaming" style="display: none;"></iframe>
+
+    <script>
+      function callback() {
+        /*do something*/
+      }
+
+      function connect() {
+        // iframeを利用してコネクションを確立
+        var iframe = document.getElementById('iframe_streaming');
+        iframe.src = 'http://www.foo.org/comet';
+      }
+    </script>
+
+    <!- ストリーミング実装例(サーバーレスポンス) -->
+    <!-- <script>window.parent.callback('DATA_1');</script>
+    <script>window.parent.callback('DATA_2');</script> -->
+
+
+    <!-- チャットクライアントの実装例 -->
+    <!-- エンターキーでテキスト送信 -->
+    <input onkeydown="if(event.keyCode===13)submit(this)">
+    <script>
+      var ws = new WebSocket('ws://localhost:8888/');
+
+      //受信メッセージをbodyに挿入する
+      ws.onmessage = function(event) {
+        var comment = document.createElement('li');
+        comment.textContent = event.data;
+        documentbody.appendChild(comment);
+      };
+
+      //テキストボックスの値をサーバに送信する
+      function submit(textbox) {
+        ws.send(textbox.value);
+        textbox.value = '';
+      }
+    </script>
+  </body>
+</html>
