@@ -6,7 +6,7 @@
   </head>
   <body>
     <!-- ストリーミング実装例(クライアントページ) -->
-    <!-- <iframe id="iframe_streaming" style="display: none;"></iframe>
+     <!-- <iframe id="iframe_streaming" style="display: none;"></iframe>
 
     <script>
       function callback() {
@@ -18,9 +18,9 @@
         var iframe = document.getElementById('iframe_streaming');
         iframe.src = 'http://www.foo.org/comet';
       }
-    </script>
+    </script>-->
 
-    <!- ストリーミング実装例(サーバーレスポンス) -->
+    <!-- ストリーミング実装例(サーバーレスポンス) -->
     <!-- <script>window.parent.callback('DATA_1');</script>
     <script>window.parent.callback('DATA_2');</script> -->
 
@@ -40,6 +40,7 @@
 
       //テキストボックスの値をサーバに送信する
       function submit(textbox) {
+        debugger;
         ws.send(textbox.value);
         textbox.value = '';
       }

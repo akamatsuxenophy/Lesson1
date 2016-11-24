@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>pjs16</title>
+  </head>
+  <body>
+    <form name="fm">
+      <input type="text" id="dat" value="">
+      <input type="button" id="save" value="保存">
+      <input type="button" id="load" value="読み込み">
+    </form>
+
+    <script>
+    var indexDB = window.indexedDB ||
+                  window.webkitIndexedDB ||
+                  window.mozIndexedDB;
+
+    var db = null;
+
+    //データベースに接続
+    var request = indexedDB.open('testdb');
+
+    //データベースに接続成功
+    request.onsuccess = function(event) {
+      debugger;
+      db = event.target.result;
+      hoge();
+    };
+
+    //データベースに接続失敗
+    request.onerror = function(event) {
+      alert('データベースの接続に失敗しました');
+    }
+
+    function hoge() {
+      console.log('hogehoge');
+      var request1 = db.setVersion('1.0');
+
+      request.onsuccess = function(event) {
+        //オブジェクトストアの作成をする
+        var store = db.createObjectStore('books', {
+          keyPath: '_id',
+          autoIncrement: true
+        });
+      };
+    }
+
+    // var request1 = db.setVersion('1.0');
+
+    request.onsuccess = function(event) {
+      //オブジェクトストアの作成をする
+      var store = db.createObjectStore('books', {
+        keyPath: '_id',
+        autoIncrement: true
+      });
+    };
+
+
+    //保存クリックを押した時の処理
+    document.getElementById('save').addEventListener('click', function() {
+      var str = document.fm.dat.value;
+      sessionStorage.setItem("test", str);
+      //ssesionStorage.test = str;
+      // sessionStorage['test'] = str;
+      alert("「" + str + "」を保存しました。");
+    }, false);
+
+    //読み込みボタンをクリックした時
+    document.getElementById('load').addEventListener('click', function() {
+      var txt = sessionStorage.getItem("test");
+      // var txt = sessionStorage.test;
+      // var txt = sessionStorage['test']
+      if(txt === null) txt = "データがありません！";
+      if(txt === "") txt = "文字が入力されてません！";
+      alert("「" + txt + "」");
+
+      for (var i = 0; i < sessionStorage.length; i++) {
+        var key = sessionStorage.key(i),
+        value = sessionStorage[key];
+      }
+      alert(value.length);
+    }, false);
+
+    var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+
+    //データ追加のラッパー関数
+    function addData(data) {
+      //トランザクションの開始
+      var transaction = db.transaction(['books'], IDBTransaction.READ_WRITE);
+      //データ追加(addの代わりにputでも可)
+      var request = transaction.objectStore('books').add(data);
+
+      request.onsuccess = function(event) {
+        //成功するとキーを返す
+        var key = event.target.result;
+        console.log('success! key ->', key);
+      };
+    }
+
+    //データ参照のラッパー関数
+    function getData(key) {
+      //トランザクションの開始
+      var transaction = db.transaction(['books']);
+      //データの参照
+      var request = transaction.objectStore('books').get(key);
+
+      request.onsuccess = function(event) {
+        //成功するとデータを返す
+        var data = event.target.result;
+        console.log('success! data ->', data);
+      };
+    }
+
+    //データ削除のラッパー関数
+    function  deleteData(key) {
+      //トランザクションの開始
+      var transaction = db.transaction(['books'], IDBTransaction.READ_WRITE);
+      //データ削除
+      var request = transaction.objectStore('books').delete(key);
+
+      request.onsuccess = function(event) {
+        console.log('success');
+      };
+    }
+
+    </script>
+    </body>
+</html>

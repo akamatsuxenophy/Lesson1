@@ -43,11 +43,14 @@
 
     <!-- dataTransfer.addElementの例 -->
     <div id="container">
-      <div id="handler">handler</div>
+      <div id="handler" draggable="true">handler</div>
     </div>
 
     <script>
-      var containers = document.getElementById('container');
+      // var containers = document.getElementById('container');
+      //     handler = document.getElementById('handler');
+
+      var containers = document.getElementById('container'),
           handler = document.getElementById('handler');
 
       //handlerのdラッグ開始

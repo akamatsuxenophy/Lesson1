@@ -127,7 +127,7 @@
   //接続イベントを補足
   server.addListener('connection', function(socket) {
     //ログを表示する
-    console.log('connection:', socket);
+    console.log('onconnection:', socket);
 
     //メッセージ受信イベントを補足
     socket.addListener('message', function(data) {
