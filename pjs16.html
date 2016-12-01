@@ -23,7 +23,6 @@
 
     //データベースに接続成功
     request.onsuccess = function(event) {
-      debugger;
       db = event.target.result;
       hoge();
     };
@@ -35,7 +34,7 @@
 
     function hoge() {
       console.log('hogehoge');
-      var request1 = db.setVersion('1.0');
+      // var request1 = db.setVersion('1.0'); //setVersionは使えない
 
       request.onsuccess = function(event) {
         //オブジェクトストアの作成をする
@@ -46,15 +45,41 @@
       };
     }
 
-    // var request1 = db.setVersion('1.0');
+    var oIndexDB = null;
+  if ( window.indexedDB ) {
+    debugger;
+     oIndexDB = window.indexedDB
+  }
+  if ( oIndexDB == null ) {
+     handleError();
+  }
 
-    request.onsuccess = function(event) {
-      //オブジェクトストアの作成をする
-      var store = db.createObjectStore('books', {
-        keyPath: '_id',
-        autoIncrement: true
-      });
-    };
+
+    //データ参照のラッパー関数
+    function getData(key) {
+      //トランザクションの開始
+      var transaction = db.transaction(['books']);
+      //データの参照
+      var request = transaction.objectStore('books').get(key);
+
+      request.onsuccess = function(event) {
+        //成功するとデータを返す
+        var data = event.target.result;
+        console.log('success! data ->', data);
+      };
+    }
+
+    //データ削除のラッパー関数
+    function  deleteData(key) {
+      //トランザクションの開始
+      var transaction = db.transaction(['books'], IDBTransaction.READ_WRITE);
+      //データ削除
+      var request = transaction.objectStore('books').delete(key);
+
+      request.onsuccess = function(event) {
+        console.log('success');
+      };
+    }
 
 
     //保存クリックを押した時の処理
@@ -97,33 +122,6 @@
         console.log('success! key ->', key);
       };
     }
-
-    //データ参照のラッパー関数
-    function getData(key) {
-      //トランザクションの開始
-      var transaction = db.transaction(['books']);
-      //データの参照
-      var request = transaction.objectStore('books').get(key);
-
-      request.onsuccess = function(event) {
-        //成功するとデータを返す
-        var data = event.target.result;
-        console.log('success! data ->', data);
-      };
-    }
-
-    //データ削除のラッパー関数
-    function  deleteData(key) {
-      //トランザクションの開始
-      var transaction = db.transaction(['books'], IDBTransaction.READ_WRITE);
-      //データ削除
-      var request = transaction.objectStore('books').delete(key);
-
-      request.onsuccess = function(event) {
-        console.log('success');
-      };
-    }
-
     </script>
     </body>
 </html>

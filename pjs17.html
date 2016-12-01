@@ -28,7 +28,7 @@
     <!-- チャットクライアントの実装例 -->
     <!-- エンターキーでテキスト送信 -->
     <input onkeydown="if(event.keyCode===13)submit(this)">
-    <script>
+    <!-- <script>
       var ws = new WebSocket('ws://localhost:8888/');
 
       //受信メッセージをbodyに挿入する
@@ -39,11 +39,12 @@
       };
 
       //テキストボックスの値をサーバに送信する
-      function submit(textbox) {
+       function submit(textbox) {
         debugger;
         ws.send(textbox.value);
         textbox.value = '';
       }
-    </script>
+    </script> -->
+    <script type="text/javascript" src="./pjs17.js"></script>
   </body>
 </html>

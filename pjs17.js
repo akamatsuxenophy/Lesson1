@@ -1,19 +1,20 @@
 //WebSocket
   //ポーリングの実装例
-//   setInterval(function() {
-//     var xhr = new XMRHttpRequest();
-//     xhr.onreadystatechange = function() {
-//       if(xhr.readyState == 4 && xhr.status == 200) {
-//         var res = JSON.parse(xhr.responseText);
-//         //更新があったらアクションを実行
-//         if(res.serverStateChanged) {
-//           /*do something*/
-//         }
-//       }
-//     };
-//     xhr.open('GET', 'http://www.foo.org/checkServerState');
-//     xhr.send();
-//   }, 100);
+  setInterval(function() {
+    debugger;
+    var xhr = new XMRHttpRequest();
+    xhr.onreadystatechange = function() {
+      if(xhr.readyState == 4 && xhr.status == 200) {
+        var res = JSON.parse(xhr.responseText);
+        //更新があったらアクションを実行
+        if(res.serverStateChanged) {
+          /*do something*/
+        }
+      }
+    };
+    xhr.open('GET', 'http://www.foo.org/checkServerState');
+    xhr.send();
+  }, 100);
 //
 //
 //   //Comet-ロングポーリングの実装例
@@ -119,23 +120,23 @@
 
   // WebSocketサーバの実装例
   //WebSocket-serverを利用する
-  var ws = require('websocket-server');
-
-  //WebSocketサーバの生成
-  var server = ws.createServer();
-
-  //接続イベントを補足
-  server.addListener('connection', function(socket) {
-    //ログを表示する
-    console.log('onconnection:', socket);
-
-    //メッセージ受信イベントを補足
-    socket.addListener('message', function(data) {
-      //接続中のすべての人に受信メッセージをそのままブロードキャスト
-      server.broadcast(data);
-    });
-  });
-
-  //ポート8888番でアクセスを受け付ける
-  server.listen(8888);
-  console.log('waiting...');
+  // var ws = require('websocket-server');
+  //
+  // //WebSocketサーバの生成
+  // var server = ws.createServer();
+  //
+  // //接続イベントを補足
+  // server.addListener('connection', function(socket) {
+  //   //ログを表示する
+  //   console.log('onconnection:', socket);
+  //
+  //   //メッセージ受信イベントを補足
+  //   socket.addListener('message', function(data) {
+  //     //接続中のすべての人に受信メッセージをそのままブロードキャスト
+  //     server.broadcast(data);
+  //   });
+  // });
+  //
+  // //ポート8888番でアクセスを受け付ける
+  // server.listen(8888);
+  // console.log('waiting...');
