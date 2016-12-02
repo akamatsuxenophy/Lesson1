@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>a</title>
+  </head>
+  <!-- <body>
+    <img src="http://maps.google.com/maps/api/staticmap?center=Tokyo&size=512x512&sensor=false" />
+    <script type="text/javascript">
+    debugger;
+      navigator.geolocation.getCurrentPosition(function(pos) {
+        var lat = pos.coords.latitude;
+        var lng = pos.coords.longitude;
+        var img = document.createElement('img');
+        img.src = 'http://maps.google.com/maps/api/staticmap?center=' + lat + ',' + lng +
+        '&zoom=14&size=512x512&sensor=true';
+        document.body.appendChild(img);
+      });
+    </script>
+  </body> -->
+  <!-- <body onload="initialize()"> -->
+  <body>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAVPoN7qIuP8yP7vTEs907eEcpjhuW1FC8"></script>
+    <script type="text/javascript">
+
+      //20.7コード例
+      // function initialize() {
+      //   var latlng = new google.maps.LatLng(35.6642722, 139.7291455);
+      //   var myOptions = {
+      //     zoom: 8,
+      //     center: latlng,
+      //     mapTypeId: google.maps.MapTypeId.ROADMAP
+      //   };
+      //   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+      //   map.panBy(100, 100);
+      //
+      //   //mapオブジェクトのclickイベントにイベントハンドラを追加
+      //   google.maps.event.addListener(map, 'click', function(event) {
+      //     //markerオブジェクトの生成
+      //     var marker = new google.maps.Marker({
+      //       position: event.latlng,
+      //       map: map
+      //     });
+      //   });
+      // }
+
+
+      //20.8クラス風のイベント処理
+      //MyEventListenerクラスのコンストラクタ
+      // function MyEventListener(map, latlng) {
+      //   this.map = map;
+      //   //mapオブジェクトのclickイベントにイベントハンドラを追加
+      //   google.maps.event.addListener(map, 'click', this.show_marker.bind(this));
+      // }
+      //
+      // //MyEventListenerクラスのメソッド
+      // MyEventListener.prototype.show_marker = function(event) {
+      //   var marker = new google.maps.Marker({
+      //     position: event.latlng,
+      //     map: this.map
+      //   });
+      //   google.maps.event.addListener(marker, 'click', this.show_marker.bind(this,
+      //   marker));
+      // }
+      //
+      // //MyEventListenerクラスのメソッド
+      // MyEventListener.prototype.hide_marker = function(marker, event) {
+      //   marker.setMap(null);
+      // }
+      //
+      //
+      // function initialize() {
+      //   var latlng = new google.maps.LatLng(35.6642722, 139.7291455);
+      //   var myOptions = {
+      //     zoom: 8,
+      //     center: latlng,
+      //     mapTypeId: google.maps.MapTypeId.ROADMAP
+      //   }
+      //   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+      //   new MyEventListener(map);
+      // }
+
+
+      //geolocationとgeocodingを使うコード例
+      function run() {
+        if(navigator.geolocation && navigator.geolocation.getCurrentPosition) {
+          //Geolocation APIのよびだし
+          navigator.geolocation.getCurrentPosition(function(pos) {
+            //Geolocation APIのコールバック関数
+            var lat = pos.coords.latitude;
+            var lng = pos.coords.longitude;
+            //Geocoding APIのよびだし
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng) },
+            //Geocoding　APIのコールバック関数
+            function(result, status) {
+              if(status == google.maps.GeocoderStatus.OK) {
+                if(result[1]) {
+                    alert(result[1].formatted_address);
+                }
+              } else {
+                    alert("Geocode error:" + status);
+                }
+            });
+
+          var latlng = new google.maps.LatLng(lat, lng);
+          var myOptions = {
+            zoom: 14,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+          });
+        }
+      }
+    </script>
+    <div onclick="run()">現在位置を取得</div>
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </body>
+</html>

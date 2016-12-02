@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>test</title>
+  </head>
+  <body>
+    <input type="text" id="sourceText"/>
+    <div onclick="doTranslate()">翻訳</div>
+
+
+
+    <!-- JSONPを使う例 -->
+    <!-- <script>
+      //JSONPのコールバック関数
+      function translate(response) {
+        alert(response.data.translations[0].translatedText);  //翻訳結果を表示
+      }
+
+      function doTranslate() {
+        var newScript = document.createElement('script');
+        newScript.type = 'text/javascript';
+        var sourceText = encodeURIComponent(document.getElementById("sourceText").value);
+        var source = 'https://www.googleapis.com/language/translate/v2?key=AIzaSyAVPoN7qIuP8yP7vTEs907eEcpjhuW1FC8&source=en&target=ja&callback=translateText&q=' + sourceText;
+          newScript.src = source;
+
+          //JSONSP呼び出しのためにscriptタグの動的生成
+          document.getElementsByTagName('head')[0].appendChild(newScript);
+      }
+    </script> -->
+
+
+    <!-- jQueryからJSONPの利用コード -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+      function doTranslate() {
+        $.ajax({
+          'type': 'GET',
+          'url': 'https://www.googleapis.com/language/translate/v2',
+          'data': {key: 'AIzaSyAVPoN7qIuP8yP7vTEs907eEcpjhuW1FC8', q: $('#sourceText').val(), target: 'ja'},
+          'dataType': 'jsonp',
+          'success': function(response) {
+            alert(response.data.translations[0].translatedText);
+          }
+        });
+      }
+    </script> -->
+
+
+    <!-- Google translate Javascript APIの利用コード -->
+    <script src="http://www.google.com/jsapi?key=AIzaSyAVPoN7qIuP8yP7vTEs907eEcpjhuW1FC8"></script>
+    <script type="text/javascript">
+      google.load("language", "1");
+
+      function doTranslate() {
+        var text = document.getElementById("sourceText").value;
+
+        google.language.translate(text, 'en', 'ja',
+          function(result) {
+            debugger;
+
+            if(result.translation) {
+              alert(result.translation);
+            }
+          });
+      }
+    </script>
+
+
+    <!-- Google Translate Elementの利用例 -->
+    This is Cat.
+    <div id="google_translate_element" style="display:black"></div><script>
+        function googleTranslateElement() {
+          new googleTranslateElement({pageLanguage: "en", includedLanguages: "ja"},
+        "google_translate_element");
+      };
+      </script>
+      <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+  </body>
+</html>
