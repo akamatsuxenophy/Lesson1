@@ -3,26 +3,26 @@
   <head>
     <title>a</title>
   </head>
-  <!-- <body>
-    <img src="http://maps.google.com/maps/api/staticmap?center=Tokyo&size=512x512&sensor=false" />
+  <body>
+    <img src="http://maps.google.com/maps/api/staticmap?center=Tokyo&size=512x512&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w" />
     <script type="text/javascript">
-    debugger;
       navigator.geolocation.getCurrentPosition(function(pos) {
-        var lat = pos.coords.latitude;
+        var lat = pos.coords.latitude;      //ここで現在位置取得
         var lng = pos.coords.longitude;
         var img = document.createElement('img');
-        img.src = 'http://maps.google.com/maps/api/staticmap?center=' + lat + ',' + lng +
-        '&zoom=14&size=512x512&sensor=true';
+        //ここで画像のurl作成
+        img.src = 'http://maps.google.com/maps/api/staticmap?center=' + lat + ',' + lng + '&zoom=14&size=512x512&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w';
         document.body.appendChild(img);
+
       });
     </script>
-  </body> -->
+  </body>
   <!-- <body onload="initialize()"> -->
-  <body>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAVPoN7qIuP8yP7vTEs907eEcpjhuW1FC8"></script>
+  <!-- <body>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w"></script>
     <script type="text/javascript">
 
-      //20.7コード例
+      // 20.7コード例
       // function initialize() {
       //   var latlng = new google.maps.LatLng(35.6642722, 139.7291455);
       //   var myOptions = {
@@ -41,11 +41,11 @@
       //       map: map
       //     });
       //   });
-      // }
+      //  }
 
 
       //20.8クラス風のイベント処理
-      //MyEventListenerクラスのコンストラクタ
+      // MyEventListenerクラスのコンストラクタ
       // function MyEventListener(map, latlng) {
       //   this.map = map;
       //   //mapオブジェクトのclickイベントにイベントハンドラを追加
@@ -80,41 +80,77 @@
       // }
 
 
-      //geolocationとgeocodingを使うコード例
-      function run() {
-        if(navigator.geolocation && navigator.geolocation.getCurrentPosition) {
-          //Geolocation APIのよびだし
-          navigator.geolocation.getCurrentPosition(function(pos) {
-            //Geolocation APIのコールバック関数
-            var lat = pos.coords.latitude;
-            var lng = pos.coords.longitude;
-            //Geocoding APIのよびだし
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng) },
-            //Geocoding　APIのコールバック関数
-            function(result, status) {
-              if(status == google.maps.GeocoderStatus.OK) {
-                if(result[1]) {
-                    alert(result[1].formatted_address);
-                }
-              } else {
-                    alert("Geocode error:" + status);
-                }
-            });
+      // geolocationとgeocodingを使うコード例
+      // function run() {
+      //   if(navigator.geolocation && navigator.geolocation.getCurrentPosition) {
+      //     //Geolocation APIのよびだし
+      //     navigator.geolocation.getCurrentPosition(function(pos) {
+      //       //Geolocation APIのコールバック関数
+      //       var lat = pos.coords.latitude;
+      //       var lng = pos.coords.longitude;
+      //       //Geocoding APIのよびだし
+      //       var geocoder = new google.maps.Geocoder();
+      //       geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng) },
+      //       //Geocoding　APIのコールバック関数
+      //       function(result, status) {
+      //         if(status == google.maps.GeocoderStatus.OK) {
+      //           if(result[1]) {
+      //               alert(result[1].formatted_address);
+      //           }
+      //         } else {
+      //               alert("Geocode error:" + status);
+      //           }
+      //       });
+      //     var latlng = new google.maps.LatLng(lat, lng);
+      //     var myOptions = {
+      //       zoom: 14,
+      //       center: latlng,
+      //       mapTypeId: google.maps.MapTypeId.ROADMAP
+      //     };
+      //
+      //     new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+      //     });
+      //   }
+      // }
+    </script> -->
+    <!-- <div onclick="run()">現在位置を取得</div>
+    <div id="map_canvas" style="width:100%; height:100%"></div> -->
 
-          var latlng = new google.maps.LatLng(lat, lng);
-          var myOptions = {
-            zoom: 14,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
+    <!-- <script src="http://platform.twitter.com/anywhere.js?id=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w&v=1"></script>
+    <script type="text/javascript">
+    twttr.anywhere(function(T) {
+      T('#follow').followButton('任意のTwitterアカウント');
+    });
+    </script> -->
 
-          new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    <!-- <span id="follow"></span> -->
+
+
+    <!-- facebookJavascript例 -->
+    <!-- <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/ja_JP/sdk.js"></script>
+    <script type="text/javascript">
+      FB.init({
+        appId: '389443934732618',
+        status: true,
+        cookie: true,
+        xfbml: true
+      });
+
+      FB.login(function(response) {
+        if(response.session) {
+          FB.api('/me', function(response) {
+            alert(response.name);
           });
+        } else {
+          debugger;
         }
-      }
-    </script>
-    <div onclick="run()">現在位置を取得</div>
-    <div id="map_canvas" style="width:100%; height:100%"></div>
+      });
+      </script> -->
+
+      <!-- <iframe src="http://www.facebook.com/plugins/like.php?href=http://localhost/lesson1/image.html"
+              scrolling="no" frameborder="0"
+              style="border:none; width:450px; height:80px"></iframe>-->
+
   </body>
 </html>

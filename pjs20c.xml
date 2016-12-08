@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="aaa">
+    <Require feature="opensocial-0.8" />
+    <Require feature="tabs" />
+    <Optional feature="content-rewrite">
+      <Param name="expires">86400</Param>
+    </Optional>
+  </ModulePrefs>
+<Content type="html">
+<![CDATA[
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+  function doSearch() {
+    debugger;
+    gadgets.io.makeRequest('http:/search.twitter.com/search.json?locale=ja&q=' +
+    $('#searchText').val(),
+    function(response) {
+      var content = $('#content');
+      gadgets.json.parse(response.data).results.forEach(function(result) {
+        content.append('<li>' + result.text + '</li>');
+      });
+    });
+  }
+</script>
+<div>Hello, OpenSocial</div>
+<input type="text" id="searchText">
+<div onclick="doSearch()">検索</div>
+<ur id="content"></ur>
+]]>
+</Content>
+</Module>
+
+
+<!-- <![CDATA[
+<script type="text/javascript">
+  function init() {
+    osapi.people.getViewer({fields: ['displayName', 'birthday']}).
+    execute(function(result) {
+      if(!result.error) {
+        document.getElementById('content').innerHTML = result.displayName + "'s birthday is" + result.birthday;
+      }
+    });
+  }
+  gadgets.util.registerOnLoadHandler(init);
+</script>
+<div>Hello, OpenSocial</div>
+<div id="content"></div>
+]]> -->
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+  <title>a</title>
+  <script type="text/javascript" src="/gadgets/js/shinding-container:rpc.js?c=1&nocache=1"></script>->
+  <script type="text/javascript">
+    function init() {
+      var specUrl = 'my-gadget.xmlをホストするurl';
+      var gadget = shinding.container.createGadget({specUrl: SpecUrl});
+      shindig.container.addGadget(gadget);
+      shindig.container.layoutManager.setGadgetChromeIds(['my-gadget']);
+      shindig.container.renderGadget(gadget);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="my-gadget" class="gadgets-gadget-chrome"></div>
+  </body>
+</html> -->
