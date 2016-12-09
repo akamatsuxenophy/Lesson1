@@ -4,14 +4,15 @@
     <title>a</title>
   </head>
   <body>
-    <img src="http://maps.google.com/maps/api/staticmap?center=Tokyo&size=512x512&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w" />
+    <!-- <img src="http://maps.google.com/maps/api/staticmap?center=Tokyo&size=512x512&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w" /> -->
     <script type="text/javascript">
       navigator.geolocation.getCurrentPosition(function(pos) {
         var lat = pos.coords.latitude;      //ここで現在位置取得
         var lng = pos.coords.longitude;
+        //ここで＜img＞作る
         var img = document.createElement('img');
         //ここで画像のurl作成
-        img.src = 'http://maps.google.com/maps/api/staticmap?center=' + lat + ',' + lng + '&zoom=14&size=512x512&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w';
+        img.src = 'http://maps.google.com/maps/api/staticmap?center=' + lat + ',' + lng + '&zoom=100&size=1024x1024&sensor=false&key=AIzaSyDXToVQQkPEW0RzjzL0ovcP2ImeqxRXP6w';
         document.body.appendChild(img);
 
       });
