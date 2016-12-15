@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>phpTest</title>
+    <title>phpTest2</title>
   </head>
   <body>
     <?php
@@ -140,103 +140,65 @@ EOD;
     ];
 
     print $data6[0]['address'];
+    echo "<br/>";
 
 
 
+    $data7 = [1 => '山田', 2 => '掛谷', 3 => '日尾', 4 => '本多'];
+    print_r($data7);
+    echo "<br/>";
 
 
+    $data8 = [1 => '山田', 4 => '掛谷', '日尾'];
+    print_r($data8);
+    echo "<br/>";
 
 
+    $data9 = [-10 => '山田', '日尾'];
+    print_r($data9);
+    echo "<br/>";
 
 
+    $data10 = ['山田' => '太郎', 15 => '二郎', '鈴木' => '三郎', '四郎', '五朗'];
+    print_r($data10);
+    echo "<br/>";
 
 
+    //キーは整数値、文字列に変換される
+    $data11 = [
+      'str' => 0, //文字列
+      '7' => 1, //整数
+      '07' => 2,  //整数(のような文字列)
+      10.5 => 3,  //文字列小数点数
+      true => 4,  //bool値
+      null => 5,  //null値
+    ];
+    print_r($data11);
+    echo "<br/>";
 
 
 
+    //キャスト
+    var_dump((int)1530.95); //結果: int(1530)
+    var_dump((int)-1530.95);  //結果: int(-1530)
+    var_dump((int)true);  //結果: int(1)
+    var_dump((string)true); //結果: string(1) "1"
+    var_dump((int)false); //結果: int(0)
+    var_dump((string)false);  //結果: string(0) ""
+    var_dump((array)108); //結果: array(1)  {[0] => int(108)}
+    var_dump((unset)1530.95); //結果: null
+    echo "<br/>";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //文字列から文字列から数値の型へのキャスト
+    var_dump((int)'0b11');  //結果: int(0)
+    var_dump((int)'0777');  //結果: int(777)
+    var_dump((int)'0xFF');  //結果: int(0)
+    var_dump((int)'1E4');  //結果: int(1)
+    var_dump(bindec('0b11')); //結果: int(3)
+    var_dump(octdec('0777')); //int(511)
+    var_dump(hexdec('0xFF')); //結果: int(255)
+    var_dump((float)'1E4')  ; //結果: float(10000)
     ?>
   </body>
 </html>
