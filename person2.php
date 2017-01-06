@@ -14,6 +14,23 @@
           return $this->width * $this->height / 2;
         }
       }
+
+
+      //インターフェイス
+      class Triangle2 implements IFigure2 {
+        //プロパティを定義
+        private $width;
+        private $height;
+        //コンストラクタでプロパティを初期化
+        public function __construct($width, $height) {
+          $this->width = $width;
+          $this->height = $height;
+        }
+        // IFigure2::getArea2メソッド実装
+        public function getArea2() {
+          return $this->width * $this->height / 2;
+        }
+      }
     ?>
  </body>
 </html>

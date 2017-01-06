@@ -24,6 +24,23 @@
         public function __destructb() {
           print '<p>'.__class__.'オブジェクトが破棄されました。';
         }
+
+
+        // __stoString
+        public function __toString() {
+          return $this->lastName.$this->firstName;
+        }
+
+
+        //デバッグ情報をカスタマイズする - __debugInfo
+        public function __debugInfo() {
+          return [
+            '名' => $this->firstName,
+            '姓' => $this->lastName
+          ];
+        }
+
+
       }
 
 
@@ -132,6 +149,55 @@
       }
 
 
+      //スーパークラスのメソッドを呼び出す
+      class HetareBusinessPerson extends BusinessPerson {
+        //BusinessPersonクラスのworkメソッドをオーバーライド
+        public function work() {
+          parent::work();
+          print 'ただし、ぼちぼちと...';
+        }
+      }
+
+
+      //その２
+      class Foreigner extends Person {
+        //新たに追加したmiddleNameプロパティ
+        public $middleName;
+
+
+        //スーパークラスのコンストラクタをオーバーライド
+        public function __construct($firstName, $middleName, $lastName) {
+
+        parent::__construct($firstName, $lastName);
+
+        $this->middleName;
+        }
+        //middleNameプロパティ対応にshowメソッドもオーバーライド
+        public function show(){
+          print "<p>僕の名前は{$this->firstName}.{$this->middleName}.{$this->lastName}です。</p>";
+        }
+      }
+
+      // 練習問題
+      class MyClassc {
+        protected $data;
+        public function ___construct($data) {
+          $this->data = $data;
+        }
+        public function getData() {
+          return $this->data;
+        }
+      }
+
+      class Exm extends MyClassc {
+        public function showb() {
+          print "~{$this->data}~";
+        }
+      }
+
+
+
+
       //ポリモーフィズム
       class Figure {
         //プロパティを定義(protected修飾子で制限)
@@ -150,6 +216,12 @@
       }
 
 
+      //インターフェイス
+      interface IFigure2 {
+        function getArea2();
+      }
+
+
 
       // MachineTraitトレイトを定義
       trait MachineTrait {
@@ -160,42 +232,6 @@
           print $this->starting;
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ?>
   </body>
 </html>
