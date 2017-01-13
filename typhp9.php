@@ -7,19 +7,19 @@
   <body>
     <?php
       // データベースの接続
-      $dsn = 'mysql:dbname=selfphp: host=127.0.0.1; charset=utf8';
-      $url = 'selfurl';
-      $passwd = 'selfpass';
-
-      try {
-        $db = new PDO($dsn, $url, $passwd);
-        print '接続に成功しました。';
-      } catch (PDOException $e) {
-        print "接続エラー: {$e->getMessage()}";
-      } finally {
-        $db = null;
-      }
-
+      // $dsn = 'mysql:dbname=selfphp: host=127.0.0.1; charset=utf8';
+      // $url = 'selfurl';
+      // $passwd = 'selfpass';
+      //
+      // try {
+      //   $db = new PDO($dsn, $url, $passwd);
+      //   print '接続に成功しました。';
+      // } catch (PDOException $e) {
+      //   print "接続エラー: {$e->getMessage()}";
+      // } finally {
+      //   $db = null;
+      // }
+      //
 
       require_once 'DbManager.php';
 

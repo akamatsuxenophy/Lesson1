@@ -172,44 +172,11 @@
         echo "<br/>";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //名前空間
+        require_once 'MyClass.php';
+        use localhost\lesson1\Myclass;
+        print MyClass::showClass();
+        echo "<br/>";
     ?>
   </body>
 </html>
