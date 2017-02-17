@@ -28,6 +28,7 @@
 	<div id="sidebar" class="sidebar">
 		<header id="masthead" class="site-header" role="banner">
 			<div class="site-branding">
+        こんにちわ
 				<?php
 					twentyfifteen_the_custom_logo();
 
